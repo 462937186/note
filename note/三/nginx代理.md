@@ -44,7 +44,7 @@ server{
 
 
 
-![1](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/2019-01-27_002915.png?raw=true)
+![1](https://github.com/PandoraSB0X/record/blob/master/note/img/nginx.png?raw=true)
 
 ##### 访问的时候直接利用配好的端口加路径  yun.localhost/pages/management/management.html
 

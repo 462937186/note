@@ -176,7 +176,7 @@ var convertData = function (data) {
     };
 ```
 
-![](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/2019-02-01_180041.png?raw=true)
+![echarts地图](https://github.com/PandoraSB0X/record/blob/master/note/img/echarts-1.png?raw=true)
 
 上述地图option
 
@@ -472,6 +472,6 @@ var socket;
 
 #### 根据WebSocket返回的数据重新set图表（当然使用定时器也可以）
 
-![](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/Video_2019-02-01_184220.gif?raw=true)
+![echarts折线图](https://github.com/PandoraSB0X/record/blob/master/note/img/echarts-2.gif?raw=true)
 
 #### 图表不止这点但是做法都差不多，配置项官网上也有就不挂了

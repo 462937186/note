@@ -6,13 +6,7 @@
 
 ### 2、设置中文
 
-![Video_2018-12-31_130302](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/Video_2018-12-31_130302.gif?raw=true)
-
-
-
-
-
-
+![设置中文](https://github.com/PandoraSB0X/record/blob/master/note/img/Tortoisegit-1.gif?raw=true)
 
 
 
@@ -20,7 +14,7 @@
 
 ### 利用Tortoisegit解决冲突
 
-![img](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/1128526-20170509003839113-889285740.png?raw=true)
+![img](https://github.com/PandoraSB0X/record/blob/master/note/img/Tortoisegit-2.png?raw=true)
 
 
 
@@ -32,23 +26,23 @@
 
 ### 利用Tortoisegit设置外部解决冲突程序解决冲突
 
-![冲突解决](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/%E5%B7%AE%E5%BC%82%E6%9F%A5%E7%9C%8B%E5%99%A8%20.jpg?raw=true)
+![冲突解决](https://github.com/PandoraSB0X/record/blob/master/note/img/%E5%B7%AE%E5%BC%82%E6%9F%A5%E7%9C%8B%E5%99%A8%20.jpg?raw=true)
 
 
 
-![冲突解决工具](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E5%B7%A5%E5%85%B7.jpg?raw=true)
+![冲突解决工具](https://github.com/PandoraSB0X/record/blob/master/note/img/%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E5%B7%A5%E5%85%B7.jpg?raw=true)
 
 
 
 ### 设置合并工具这里我设置的是vscode,利用vscode进行冲突处理
 
-![vscode](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/1546234900(1).jpg?raw=true)
+![vscode](https://github.com/PandoraSB0X/record/blob/master/note/img/%E5%B7%AE%E5%BC%82%E6%9F%A5%E7%9C%8B%E5%99%A8%20.jpg?raw=true)
 
-![1546234984(F:\record\笔记\img\1546234984(1).png)](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/1546234984(1).png?raw=true)
+![vscode解决冲突](https://github.com/PandoraSB0X/record/blob/master/note/img/Tortoisegit-3.png?raw=true)
 
 
 
-![1546235071(F:\record\笔记\img\1546235071(1).jpg)](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/1546235071(1).jpg?raw=true)
+![1546235071(F:\record\笔记\img\1546235071(1).jpg)](https://github.com/PandoraSB0X/record/blob/master/note/img/Tortoisegit-4.jpg?raw=true)
 
 
 
@@ -58,7 +52,7 @@
 
 ### 如果遇到上传无权限问题，请设置好您的ssh key 并且在可视化设置ssh客户端
 
-![](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/1546237214(1)-1546237396182.jpg?raw=true)
+![](https://github.com/PandoraSB0X/record/blob/master/note/img/Tortoisegit-5.jpg?raw=true)
 
 ### 一般来说都使用的是git的安装目录下的   usr\bin 的ssh.exe文件
 
