@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽，放大缩小</title>
+    <style>
+        
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            position: relative;
+            width: 500px;
+            height: 500px;
+            background: red;
+            cursor: pointer;
+        }
+
+        .rotate {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .del {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .deag {
+            cursor: pointer;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        拖拽移动
+        <i class="rotate">旋转</i>
+        <i class="del">删除</i>
+        <i class="deag">拖拽放大缩小</i>
+    </div>
+    <script src="../BASE/jq.min.js"></script>
+    <script>
+        var preX,preY;//上一次鼠标点的坐标
+        var curX,curY;//本次鼠标点的坐标
+        var preAngle;//上一次鼠标点与圆心(150,150)的X轴形成的角度(弧度单位)
+        var transferAngle;//当前鼠标点与上一次preAngle之间变化的角度
+        var a = 0;
+        $(".rotate").mousedown(function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            //获取圆心（盒子距离浏览器的距离+自身宽高的一半）
+            let oldY = $(".box").offset().top+$(".box")[0].offsetHeight/2;
+            let oldX = $(".box").offset().left+$(".box")[0].offsetWidth/2;
+            let myimg = e.target.parentElement;
+            preX = e.clientX;
+            preY = e.clientY;
+            //计算当前点击的点与圆心的X轴的夹角(弧度) --> 上半圆为负(0 ~ -180), 下半圆未正[0 ~ 180]
+            preAngle = Math.atan2(preY - oldY, preX - oldX);
+
+            document.onmousemove = function (ev) {
+                ev.stopPropagation();
+                ev.preventDefault();
+                //新的点的位置，即鼠标的(x,y)的位置
+                curX = event.clientX;
+                curY = event.clientY;
+                //移动后的鼠标点与圆心的X轴形成的角度(弧度单位)
+                var curAngle = Math.atan2(curY - oldY, curX - oldX);
+                transferAngle = curAngle - preAngle;
+                a += (transferAngle * 180 / Math.PI);
+                 myimg.style.transform = "rotate(" +a+ "deg)";
+                // $('.rotate').rotate(a);
+                preX = curX;
+                preY = curY;
+                preAngle = curAngle;
+                //atan2() 方法可返回从 x 轴到点 (x,y) 之间的角度。
+                // myimg.style.transform = "rotate(" + (Math.atan2(newX - nowx, nowy - newY) / Math.PI * 180 - 90) + "deg)"
+                ev.target.onmouseup = function (e) {
+                    document.onmousedown = null;
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                }
+            }
+        })
+        $(".del").mousedown(function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            $(".box").remove()
+        })
+        $(".deag").mousedown(function(e){
+            let target = e.target;
+				let mybox = target.parentElement; //盒子
+				//let fa = target.parentElement.children[1]; //img标签
+				//var nowsize = fa.style.fontSize;
+
+				// 阻止冒泡,避免缩放时触发移动事件
+				e.stopPropagation();
+				e.preventDefault();
+				var pos = {
+					'w': mybox.offsetWidth,
+					'h': mybox.offsetHeight,
+					'x': e.clientX,
+					'y': e.clientY
+				};
+				document.onmousemove = function(ev) {
+					ev.stopPropagation();
+					ev.preventDefault();
+					// 设置图片的最小缩放为30*30
+					//clientX 事件属性返回当事件被触发时鼠标指针向对于浏览器页面（或客户区）的水平坐标。
+					var w = Math.max(200, ev.clientX - pos.x + pos.w)
+						var tt = w / pos.w;
+								
+						// 新的宽/旧的宽 得到比例尺
+						//						var pp = tt*pos.h;
+						//						var h = Math.max(30, ev.clientY - pos.y + pos.h)
+						//						var h = Math.max(30, pos.h * tt)
+						var h = pos.h * tt;
+				
+
+					// 设置图片的最大宽高
+					//offsetWidth返回元素的宽度
+					//offsetTop返回元素的上外缘距离最近采用定位父元素内壁的距离，
+					//如果父元素中没有采用定位的，则是获取上外边缘距离文档内壁的距离
+					//   w = w >= fa.offsetWidth-mybox.offsetLeft ? fa.offsetWidth-mybox.offsetLeft : w
+					//	h = h >= fa.offsetHeight-mybox.offsetTop ? fa.offsetHeight-mybox.offsetTop : h
+				//var size = nowsize.slice(0,-2)*1*tt;
+
+					mybox.style.width = w + 'px';
+					mybox.style.height = h + 'px';
+					// fa.style.width = w + 'px';
+					// fa.style.height = h + 'px';
+					// fa.style.fontSize = size+'px';
+
+					ev.target.onmouseup = function(e) {
+						document.onmousedown = null;
+						document.onmouseup = null;
+						document.onmousemove = null;
+					}
+				}
+        })
+        $(".box").mousedown(function (e) {
+            var nowshowimg = e.target;
+            // 浏览器有一些图片的默认事件,这里要阻止
+            e.preventDefault();
+            var nowbox = e.target;
+            var disX = e.clientX - nowbox.style.left.slice(0, -2);
+            var disY = e.clientY - nowbox.style.top.slice(0, -2);
+            nowshowimg.onmousemove = function (ev) {
+                // ev.preventDefault();
+                var x = ev.clientX - disX;
+                var y = ev.clientY - disY;
+                // 图形移动的边界判断
+                x = x <= 0 ? 0 : x;
+                x = x >= document.offsetWidth - nowshowimg.offsetWidth ? document.offsetWidth - nowshowimg.offsetWidth :
+                    x;
+                y = y <= 0 ? 0 : y;
+                y = y >= document.offsetHeight - nowshowimg.offsetHeight ? document.offsetHeight -
+                    nowshowimg.offsetHeight : y;
+                nowbox.style.left = x + 'px';
+                nowbox.style.top = y + 'px';
+            }
+            nowshowimg.onmouseup = function (ev) {
+                // ev.preventDefault();
+                nowshowimg.onmousemove = null;
+                nowshowimg.onmouseup = null;
+            }
+
+        })
+        // function  rotate(e) {
+        //     e.stopPropagation();
+        //     e.preventDefault();
+        //     let oldY = e.target.offsetTop;
+        //     let oldX = e.target.offsetLeft;
+        //     let myimg = e.target.parentElement;
+        //     let nowx = e.target.parentElement.parentElement.style.left.slice(0, -2) * 1 + oldX / 2;
+        //     let nowy = e.target.parentElement.parentElement.style.top.slice(0, -2) * 1 + oldY / 2;
+        //     // console.log(nowx, nowy)
+        //     document.onmousemove = function (ev) {
+        //         let newY = ev.clientY;
+        //         let newX = ev.clientX;
+        //         ev.stopPropagation();
+        //         ev.preventDefault();
+        //         myimg.style.transform = "rotate(" + (Math.atan2(newX - nowx, nowy - newY) / Math.PI *
+        //             180 - 90) + "deg)"
+        //         ev.target.onmouseup = function (e) {
+        //             document.onmousedown = null;
+        //             document.onmouseup = null;
+        //             document.onmousemove = null;
+        //         }
+        //     }
+        // }
+    </script>
+</body>
+
+</html>
