@@ -12,7 +12,180 @@
 
 
 
+#### vue-cli 3 创建项目步骤：
 
+![vue-cli-1](https://github.com/PandoraSB0X/record/blob/master/note/img/vue-cli3.0img/vue-cli-1.png?raw=true)
+
+#### 第一个是默认模板；第二个是自定义选择；第一个会默认安装基本模板、选择第二个进入以下选择
+
+![vue-cli-2](https://github.com/PandoraSB0X/record/blob/master/note/img/vue-cli3.0img/vue-cli-2.png?raw=true)
+
+#### 方向键控制空格选择 Enter进入下一步
+
+![vue-cli-3](https://github.com/PandoraSB0X/record/blob/master/note/img/vue-cli3.0img/vue-cli-3.png?raw=true)
+
+#### 路由是否选择history模式否的话是哈希路由，选择css预处理器 sass和less
+
+![vue-cli-4](https://github.com/PandoraSB0X/record/blob/master/note/img/vue-cli3.0img/vue-cli-4.png?raw=true)
+
+#### 选择代码规范配置
+
+![vue-cli-5](https://github.com/PandoraSB0X/record/blob/master/note/img/vue-cli3.0img/vue-cli-5.png?raw=true)
+
+#### 选择保存时候进行代码检测，在后面也可以关闭检测
+
+![vue-cli-6](https://github.com/PandoraSB0X/record/blob/master/note/img/vue-cli3.0img/vue-cli-6.png?raw=true)
+
+#### 会保存在根目录下，然后会有一步是否保存本次配置，可以选择保存此次配置作为下次开发的模板。
+
+#### vue-cli 3.x需要在根目录也就是与src同级的目录创建一个vue.config.js用来配置webpack，代理等参数。
+
+```js
+// vue.config.js 配置说明
+// 这里只列一部分，具体配置惨考文档
+module.exports = {
+    // baseUrl  type:{string} default:'/'  从 Vue CLI 3.3 起已弃用，请使用publicPath
+    // 将部署应用程序的基本URL
+    // 默认情况下，Vue CLI假设您的应用程序将部署在域的根目录下。
+    // https://www.my-app.com/。如果应用程序部署在子路径上，则需要使用此选项指定子路径。例如，如果您的应用程序部署在https://www.foobar.com/my-app/，集baseUrl到'/my-app/'.
+//这个值也可以被设置为空字符串 ('') 或是相对路径 ('./') 修改这个 那么打包出来的index.html里的路径也是根据这个改变
+    publicPath: "./",
+
+
+    // outputDir: 在npm run build时 生成文件的目录 type:string, default:'dist'
+
+     outputDir: 'dist',
+
+    // pages:{ type:Object,Default:undfind } 
+/*
+  构建多页面模式的应用程序.每个“页面”都应该有一个相应的JavaScript条目文件。该值应该是一
+  个对象，其中键是条目的名称，而该值要么是指定其条目、模板和文件名的对象，要么是指定其条目
+  的字符串，
+  详情请看下面多页面配置
+  注意：请保证pages里配置的路径和文件名 在你的文档目录都存在 否则启动服务会报错的
+*/
+     pages: {
+         //此处如果打包后打开显示空白那就直写 entry  其他不写
+          console: {
+            // 应用入口配置，相当于单页面应用的main.js，必需项
+            entry: 'src/modules/console/console.js',
+
+            // 应用的模版，相当于单页面应用的public/index.html，可选项，省略时默认与模块名一致
+            // template: 'public/console.html',
+
+            // 编译后在dist目录的输出文件名，可选项，省略时默认与模块名一致
+            // filename: 'console.html',
+
+            // 标题，可选项，一般情况不使用，通常是在路由切换时设置title
+            // 需要注意的是使用title属性template 中的 title 标签需要是 <title><%=htmlWebpackPlugin.options.title %></title>
+            // title: 'console page',
+
+            // 包含的模块，可选项
+            // chunks: ['console']
+        },
+        // 只有entry属性时，直接用字符串表示模块入口
+        client: 'src/modules/client/client.js'
+   	 },
+
+    //   lintOnSave：{ type:Boolean default:true } 问你是否使用eslint
+    lintOnSave: true,
+    // productionSourceMap：{ type:Bollean,default:true } 生产源映射
+    // 如果您不需要生产时的源映射，那么将此设置为false可以加速生产构建
+    productionSourceMap: false,
+    // devServer:{type:Object} 3个属性host,port,https
+    // 它支持webPack-dev-server的所有选项
+
+    devServer: {
+        port: 8085, // 端口号
+        host: 'localhost',
+        https: false, // https:{type:Boolean}
+        open: true, //配置自动启动浏览器
+        // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理
+        proxy: {
+            '/api': {
+                target: '<url>',
+                ws: true,
+                changeOrigin: true
+            },
+            '/foo': {
+                target: '<other_url>'
+            }
+        },  // 配置多个代理
+    }
+}
+```
+
+#### 基本上以上的vue.config.js配置能解决大部分的问题如果还需要修改就根据具体的业务进行修改。
+
+#### Vue cli 3 多页面配置
+
+##### 创建多页面应用
+
+首先，安装两个插件，vue-router和vue-wechat-title。vue-router不解释了，vue-wechat-title为单页面应用修改标题的插件.(就是标签页的名字)
+
+##### 创建模块
+
+在src下创建目录modules，在modules下创建两个模块console和client；
+
+在public下添加模版console.html和clien.html(直接复制原有的index.html即可)
+
+##### 应用路由配置
+
+通过vue-router为应用配置路由，以console模块为例，在router.js中添加路由配置：
+
+```js
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
+const routes = [
+    { path: '/', name: 'login', component: r => { require(['./login/Login'], r) }, meta: { title: 'console 登录' }}
+]
+
+export default new VueRouter({
+    routes: routes
+})
+```
+
+##### 应用title跟随路由切换
+
+```js
+import Vue from 'vue'
+import Console from './Console.vue'
+import router from './router'
+
+Vue.use(require('vue-wechat-title'))
+
+new Vue({
+    router,
+    render: h => h(Console)
+}).$mount('#console')
+```
+
+在console.vue中添加`v-wechat-title`指令，console.vue内容为：
+
+```vue
+<template>
+    <div id="console" v-wechat-title="$route.meta.title">
+        <router-view></router-view>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "console"
+    }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+至此，针对console模块的配置完成，对client模块做相同配置即可。
+
+项目结构图
 
 #### axios踩坑记录+拦截器使用+vue cli代理跨域proxy+webpack打包部署到服务器
 
@@ -50,83 +223,6 @@ main.js   import "./styls/reset.less"
 ```
 
 
-
-#### 跨域问题解决之服务器代理
-
-找到项目的config文件夹里面的index.js
-
-找到module.exports	dev	proxyTable：{}里面设置
-
-```js
-'/api':{ //小暗号
- target:'https://m.maizuo.com/',//目标服务器
- changeOrigin:true,//是否允许代理
- pathRewrite:{'^/api':''}// 匹配请求接口
-}
-
-
-请求使用
-this.$axios.get("/api/json/reply/QueryCategoryListReq",{})
-.then((res)=>{
-	console.log(res);
-})
-```
-
-##### vue之post请求
-
-```js
-var params = new URLSearchParams();
-params.append('us',this.val);
-params.append('ps',this.pas);
-this.$axios.post("my/Users/reg",params)
-.then((res)=>{
-	console.log(res);
-})
-```
-
-#### 打包相关
-
-通过npm run build 打包生成dist文件夹，里面包含css、js。其中在css、js文件夹的map文件在部署时都要将其删除
-
-###### 页面出不来
-
-找到项目的config文件夹里面的index.js
-
-找到build：{} 里面有个assetsPublicPath
-
-```js
-代码assetsPublicPath: '/',
-改为assetsPublicPath: './',
-```
-
-###### 背景图片出不来
-
-找到build文件夹下面的utils.js
-
-```js
-if (options.extract) {
-      return ExtractTextPlugin.extract({
-        use: loaders,
-        fallback: 'vue-style-loader'
-      })
-    } else {
-      return ['vue-style-loader'].concat(loaders)
-    }
-    
-    
-    改为
-    
-    
- if (options.extract) {
-      return ExtractTextPlugin.extract({
-        use: loaders,
-        fallback: 'vue-style-loader',
-        publicPath:"../../"     //增加的代码
-      })
-    } else {
-      return ['vue-style-loader'].concat(loaders)
-    }
-```
 
 ###### 打包  （开发、生产环境？） api统一管理
 
