@@ -2,13 +2,17 @@
 
 ##### 3.0版本创建的目录	 (vue create my-project)
 
-![vue-cli3.0](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/vue-cli3.0.png?raw=true)
+![vue-cli3.0](https://github.com/PandoraSB0X/record/blob/master/note/img/vue-cli3.0.png?raw=true)
 
 ##### 2.X版本创建的目录  	 (创建命令 vue init webpack my-project)
 
-![vue-cli2.x](https://github.com/PandoraSB0X/record/blob/master/%E7%AC%94%E8%AE%B0/img/vue-cli2.x.png?raw=true)
+![vue-cli2.x](https://github.com/PandoraSB0X/record/blob/master/note/img/vue-cli2.x.png?raw=true)
 
 #### 二者区别：主要是配置webpack的区别2.x版本里会帮你以webpack的模板创建好各类文件都有默认的参数，只需要改就行了。而3.0版本开始，目录结构相比2.0有很大的改变，之前的`build`和`config`文件夹没有了，如果要像以前那样配置`webpack`的参数，只需要在项目的根目录下新建`vue.config.js 文件`注意是根目录，不是`src`目录。
+
+
+
+
 
 #### axios踩坑记录+拦截器使用+vue cli代理跨域proxy+webpack打包部署到服务器
 
