@@ -11,3 +11,5 @@
 [css推荐](https://www.zhangxinxu.com/wordpress/category/css/page/3/)
 
 [微信开放社区](https://developers.weixin.qq.com/community)
+
+[入场动画思路](https://blog.csdn.net/qwe502763576/article/details/81535928)
